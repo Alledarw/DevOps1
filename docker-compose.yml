@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mongodb:
-    container_name: mongodb
+    container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
@@ -11,35 +11,43 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - compose-network
 
   user-service:
     image: alledarw/user-service:v1
-    container_name: user-service
+    container_name: user-service-compose
     ports:
       - "4001:4001"
     env_file:
       - ./backend/user-service/.env
     depends_on:
       - mongodb
+    networks:
+      - compose-network
 
   todo-service:
     image: alledarw/todo-service:v1
-    container_name: todo-service
+    container_name: todo-service-compose
     ports:
       - "4000:4000"
     env_file:
       - ./backend/todo-service/.env
     depends_on:
       - mongodb
+    networks:
+      - compose-network
 
   frontend:
     image: alledarw/frontend:v1
-    container_name: frontend
+    container_name: frontend-compose
     ports:
       - "80:80"
     depends_on:
       - user-service
       - todo-service
+    networks:
+      - compose-network
     # Add env_file if needed for frontend
     # env_file:
     #   - ./frontend/.env
@@ -49,3 +57,7 @@ volumes:
   user-logs:
   todo-logs:
   frontend-logs:
+
+networks:
+  compose-network:
+    driver: bridge
