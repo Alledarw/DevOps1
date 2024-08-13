@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+  user-service:
+    image: alledarw/user-service:v1
+    container_name: user-service
+    ports:
+      - "4001:4001"
+    env_file:
+      - ./backend/user-service/.env
+    depends_on:
+      - mongodb
+
+  todo-service:
+    image: alledarw/todo-service:v1
+    container_name: todo-service
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./backend/todo-service/.env
+    depends_on:
+      - mongodb
+
+  frontend:
+    image: alledarw/frontend:v1
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - user-service
+      - todo-service
+    # Add env_file if needed for frontend
+    # env_file:
+    #   - ./frontend/.env
+
+volumes:
+  mongo-data:
+  user-logs:
+  todo-logs:
+  frontend-logs:
