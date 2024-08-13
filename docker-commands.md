@@ -4,9 +4,9 @@
 ### Start the containers within the same network. Make sure the network is created before (docker network ls)
 docker run -p 80:80 -d --network my-network --name todo-frontend todo-frontend
 docker run -d -p 4001:4001 --network my-network --name user-service user-service
-docker run -d --network my-network -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --name mongo mongo:latest
+docker run -d --network my-network -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin MONGO_INITDB_ROOT_PASSWORD=password --name mongo mongo:latest
 
-### Make sure that you login to the mongosh in the mongo container running with auth. Otherwise you will not be able to add new users or do admin stuff.
+### Make sure that you login to the mongosh in the mongo container running with auth. Otherwise you will not be able to add new users or do admin stuff. Example: mongosh "mongodb://admin:password@localhost:27017/admin" ###
 use usersdb
 
 db.createUser({
