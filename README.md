@@ -131,3 +131,5 @@ npm start
 ## Docker
 
 1. Run the commands from the file `docker-commands.md`
+
+## NOTE: CHANGE THE HOST IN VERITYTOKEN IN TODOSERVICE TO LOCALHOST:4001 IF YOU WANT TO RUN THE PROGRAM LOCALLY
