@@ -15,7 +15,7 @@ services:
       - compose-network
 
   user-service:
-    image: alledarw/user-service:v1
+    image: alledarw/user-service:v2
     container_name: user-service-compose
     ports:
       - "4001:4001"
@@ -27,7 +27,7 @@ services:
       - compose-network
 
   todo-service:
-    image: alledarw/todo-service:v1
+    image: alledarw/todo-service:v2
     container_name: todo-service-compose
     ports:
       - "4000:4000"
