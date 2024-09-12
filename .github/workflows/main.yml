@@ -1,13 +1,45 @@
-name: CI/CD Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: npm install
-      - run: npm run build
-      - run: npm test
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+      # For the todo-service directory
+      - name: Install dependencies for todo-service
+        run: npm install
+        working-directory: ./backend/todo-service
+
+      - name: Build todo-service
+        run: npm run build
+        working-directory: ./backend/todo-service
+
+      - name: Test todo-service
+        run: npm test
+        working-directory: ./backend/todo-service
+
+      # For the user-service directory
+      - name: Install dependencies for user-service
+        run: npm install
+        working-directory: ./backend/user-service
+
+      - name: Build user-service
+        run: npm run build
+        working-directory: ./backend/user-service
+
+      - name: Test user-service
+        run: npm test
+        working-directory: ./backend/user-service
+
+      # For the frontend directory
+      - name: Install dependencies for frontend
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./frontend
+
+      - name: Test frontend
+        run: npm test
+        working-directory: ./frontend
