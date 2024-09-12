@@ -1,3 +1,11 @@
+name: CI/CD Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+# Trigger on push and pull request events
+on: 
+  push:
+  pull_request:
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
