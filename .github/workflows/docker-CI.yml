@@ -1,22 +1,14 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: ["CI/CD Demo"]  # The name of the first workflow
+    types:
+      - completed  # Trigger after the first workflow completes successfully
 
 jobs:
-  # This is a placeholder job that does nothing
-  start:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Start workflow
-        run: echo "Starting Docker CI Workflow"
-
   build:
     runs-on: ubuntu-latest
-    needs: [start, todo-service, user-service, frontend]  # Add the start job to the dependency list
 
     steps:
     - uses: actions/checkout@v4
