@@ -7,11 +7,16 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # This is a placeholder job that does nothing
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start workflow
+        run: echo "Starting Docker CI Workflow"
 
   build:
-
     runs-on: ubuntu-latest
-    needs: [todo-service, user-service, frontend]  # Wait for these jobs to finish successfully, so we dont push broken images
+    needs: [start, todo-service, user-service, frontend]  # Add the start job to the dependency list
 
     steps:
     - uses: actions/checkout@v4
