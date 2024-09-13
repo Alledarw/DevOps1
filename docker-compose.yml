@@ -15,7 +15,7 @@ services:
       - compose-network
 
   user-service:
-    image: alledarw/user-service:v2
+    image: alledarw/user-service:latest
     container_name: user-service-compose
     ports:
       - "4001:4001"
@@ -27,7 +27,7 @@ services:
       - compose-network
 
   todo-service:
-    image: alledarw/todo-service:v2
+    image: alledarw/todo-service:latest
     container_name: todo-service-compose
     ports:
       - "4000:4000"
@@ -39,7 +39,7 @@ services:
       - compose-network
 
   frontend:
-    image: alledarw/frontend:v1
+    image: alledarw/frontend:latest
     container_name: frontend-compose
     ports:
       - "80:80"
