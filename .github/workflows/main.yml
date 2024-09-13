@@ -7,13 +7,12 @@ on:
   pull_request:
 
 jobs:
-  Explore-GitHub-Actions:
+  todo-service:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-
-      # For the todo-service directory
+      
       - name: Install dependencies for todo-service
         run: npm install
         working-directory: ./backend/todo-service
@@ -26,7 +25,12 @@ jobs:
         run: npm test
         working-directory: ./backend/todo-service
 
-      # For the user-service directory
+  user-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
       - name: Install dependencies for user-service
         run: npm install
         working-directory: ./backend/user-service
@@ -39,7 +43,12 @@ jobs:
         run: npm test
         working-directory: ./backend/user-service
 
-      # For the frontend directory
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
       - name: Install dependencies for frontend
         run: npm install
         working-directory: ./frontend
