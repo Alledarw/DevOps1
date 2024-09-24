@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   workflow_run:
-    workflows: ["CI/CD Demo"]  # The name of the first workflow
+    workflows: ["main"]  # The name of the first workflow
     types:
       - completed  # Trigger after the first workflow completes successfully
 
