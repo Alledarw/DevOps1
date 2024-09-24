@@ -1,28 +1,14 @@
-name: Run tests and upload coverage
-
-on: 
-  push
-
+name: Upload coverage reports to Codecov
+on:
+  workflow_run:
+    workflows: ["main"]  # The name of the first workflow
+    types:
+      - completed  # Trigger after the first workflow completes successfully
 jobs:
-  test:
-    name: Run tests and collect coverage
+  Codecoverage:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npx jest --coverage
-
-      - name: Upload results to Codecov
-        uses: codecov/codecov-action@v4
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
